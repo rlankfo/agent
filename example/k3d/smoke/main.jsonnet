@@ -7,6 +7,11 @@ local etcd = import 'grafana-agent/smoke/etcd/main.libsonnet';
 local gragent = import 'grafana-agent/v2/main.libsonnet';
 local k = import 'ksonnet-util/kausal.libsonnet';
 
+// for operator
+local tanka = import 'github.com/grafana/jsonnet-libs/tanka-util/main.libsonnet';
+local kustomize = tanka.kustomize.new(std.thisFile);
+
+
 local namespace = k.core.v1.namespace;
 local pvc = k.core.v1.persistentVolumeClaim;
 local volumeMount = k.core.v1.volumeMount;
@@ -194,6 +199,7 @@ local smoke = {
 };
 
 {
-  monitoring: monitoring,
-  smoke: smoke,
+//  monitoring: monitoring,
+//  smoke: smoke,
+  operator: import './operator/main.jsonnet',
 }
