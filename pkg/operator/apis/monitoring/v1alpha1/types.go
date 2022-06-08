@@ -100,7 +100,7 @@ type GrafanaAgentSpec struct {
 	// volumes that are generated as a result of StorageSpec objects.
 	Volumes []v1.Volume `json:"volumes,omitempty"`
 	// VolumeMounts allows configuration of additional VolumeMounts on the output
-	// StatefulSet definition. VolumEMounts specified will be appended to other
+	// StatefulSet definition. VolumeMounts specified will be appended to other
 	// VolumeMounts in the Grafana Agent container that are generated as a result
 	// of StorageSpec objects.
 	VolumeMounts []v1.VolumeMount `json:"volumeMounts,omitempty"`
