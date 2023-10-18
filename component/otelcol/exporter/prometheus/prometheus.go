@@ -30,6 +30,7 @@ func init() {
 
 // Arguments configures the otelcol.exporter.prometheus component.
 type Arguments struct {
+	AddMetricSuffixes  bool                 `river:"add_metric_suffixes,attr,optional"`
 	IncludeTargetInfo  bool                 `river:"include_target_info,attr,optional"`
 	IncludeScopeInfo   bool                 `river:"include_scope_info,attr,optional"`
 	IncludeScopeLabels bool                 `river:"include_scope_labels,attr,optional"`
@@ -39,6 +40,7 @@ type Arguments struct {
 
 // DefaultArguments holds defaults values.
 var DefaultArguments = Arguments{
+	AddMetricSuffixes:  true,
 	IncludeTargetInfo:  true,
 	IncludeScopeInfo:   false,
 	IncludeScopeLabels: true,

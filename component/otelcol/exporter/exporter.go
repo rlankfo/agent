@@ -124,7 +124,18 @@ func (e *Exporter) Update(args component.Arguments) error {
 	reg := prometheus.NewRegistry()
 	e.collector.Set(reg)
 
-	promExporter, err := sdkprometheus.New(sdkprometheus.WithRegisterer(reg), sdkprometheus.WithoutTargetInfo())
+	promExporterOpts := []sdkprometheus.Option{
+		sdkprometheus.WithoutTargetInfo(),
+	}
+
+	// TODO: best way to get this config here?
+	addMetricSuffixes := false
+	if !addMetricSuffixes {
+		promExporterOpts = append(promExporterOpts, sdkprometheus.WithoutCounterSuffixes())
+		promExporterOpts = append(promExporterOpts, sdkprometheus.WithoutUnits())
+	}
+
+	promExporter, err := sdkprometheus.New(sdkprometheus.WithRegisterer(reg), promExporterOpts)
 	if err != nil {
 		return err
 	}
