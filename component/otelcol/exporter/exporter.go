@@ -125,6 +125,7 @@ func (e *Exporter) Update(args component.Arguments) error {
 	e.collector.Set(reg)
 
 	promExporterOpts := []sdkprometheus.Option{
+		sdkprometheus.WithRegisterer(reg),
 		sdkprometheus.WithoutTargetInfo(),
 	}
 
@@ -135,7 +136,7 @@ func (e *Exporter) Update(args component.Arguments) error {
 		promExporterOpts = append(promExporterOpts, sdkprometheus.WithoutUnits())
 	}
 
-	promExporter, err := sdkprometheus.New(sdkprometheus.WithRegisterer(reg), promExporterOpts)
+	promExporter, err := sdkprometheus.New(promExporterOpts...)
 	if err != nil {
 		return err
 	}
